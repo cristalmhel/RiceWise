@@ -62,8 +62,9 @@ class SignUpActivity : Activity() {
                     position: Int,
                     id: Long
                 ) {
+                    Log.d("MainActivity", position.toString());
                     // Get the selected region
-                    val selectedRegion = regionsList[position]
+                    val selectedRegion = regionsList[if (position - 1 < 0) 0 else position - 1]
                     val provinces = listOf("Select Province") + selectedRegion.provinceList.keys.toList()  // Getting province names
 
                     // Set up Province Spinner
