@@ -25,7 +25,6 @@ class LoginActivity : Activity() {
         val loginButton = findViewById<Button>(R.id.loginButton)
         val emailEditText = findViewById<EditText>(R.id.emailEditText)
         val passwordEditText = findViewById<EditText>(R.id.passwordEditText)
-        val resultText = findViewById<TextView>(R.id.resultText)
 
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString().trim()
@@ -36,7 +35,8 @@ class LoginActivity : Activity() {
                 return@setOnClickListener
             }
 
-            login(email, password, resultText)
+           login(email, password)
+            //startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
         }
 
         val forgotPasswordText = findViewById<TextView>(R.id.forgotPasswordText)
@@ -52,23 +52,19 @@ class LoginActivity : Activity() {
         }
     }
 
-    private fun login(email: String, password: String, resultText: TextView) {
+    private fun login(email: String, password: String) {
         val credentials = mapOf("email" to email, "password" to password)
         apiService.login(credentials).enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
-                    val loginResponse = response.body()
-                    resultText.text = "Login successful: ${loginResponse?.user?.email}"
-                    Toast.makeText(this@LoginActivity, loginResponse?.message, Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
                 } else {
                     val errorMessage = response.errorBody()?.string() ?: "Login failed"
-                    resultText.text = errorMessage
-                    Toast.makeText(this@LoginActivity, "Error: $errorMessage", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, "Invalid email or password.", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                resultText.text = "Error: ${t.message}"
                 Toast.makeText(this@LoginActivity, "Network error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
