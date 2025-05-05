@@ -15,14 +15,32 @@ import android.widget.TextView
 import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.IOException
 
+// Data classes for request and response
+data class RegisterRequest(
+    val email: String,
+    val password: String,
+    val fullname: String,
+    val region: String,
+    val province: String,
+    val city: String,
+    val barangay: String
+)
+
+data class RegisterResponse(
+    val id: String,
+    val email: String
+)
 class SignUpActivity : Activity() {
+    private val apiService = RetrofitClient.apiService
     private lateinit var spinnerRegion: Spinner
     private lateinit var spinnerProvince: Spinner
     private lateinit var spinnerCity: Spinner
     private lateinit var spinnerBarangay: Spinner
-    private lateinit var regions: List<Region>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -145,10 +163,39 @@ class SignUpActivity : Activity() {
                 ) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
-                // TODO: Register logic (e.g. Firebase auth or custom backend)
-                startActivity(Intent(this, SignUpSuccessActivity::class.java))
-                finish()
-                Toast.makeText(this, "Account created for $name", Toast.LENGTH_SHORT).show()
+                // TODO: Register logic
+                val request = RegisterRequest(
+                    email = mail,
+                    password = pass,
+                    fullname = name,
+                    region = selectedRegion,
+                    province = selectedProvince,
+                    city = selectedCity,
+                    barangay = selectedBarangay
+                )
+                apiService.register(request).enqueue(object : Callback<RegisterResponse> {
+                    override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
+                        if (response.isSuccessful) {
+                            // Save user data (optional, for session management)
+                            val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+                            sharedPreferences.edit().apply {
+                                putString("user_id", response.body()?.id)
+                                putString("email", response.body()?.email)
+                            }.apply()
+
+                            startActivity(Intent(this@SignUpActivity, SignUpSuccessActivity::class.java))
+                            finish()
+                            Toast.makeText(this@SignUpActivity, "Account created for $name", Toast.LENGTH_SHORT).show()
+                        } else {
+                            val errorMessage = response.errorBody()?.string() ?: "Registration failed"
+                            Toast.makeText(this@SignUpActivity, "Error: $errorMessage", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+                        Toast.makeText(this@SignUpActivity, "Network error: ${t.message}", Toast.LENGTH_SHORT).show()
+                    }
+                })
             }
         }
 
