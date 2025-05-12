@@ -15,16 +15,16 @@ class DashboardActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
-        val settingsIcon = findViewById<LinearLayout>(R.id.settingsIcon)
-        val logoutButton = findViewById<Button>(R.id.logout)
-        settingsIcon.setOnClickListener {
-            startActivity(Intent(this, SettingsActivity::class.java))
-            finish()
-        }
-
-        logoutButton.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
+//        val settingsIcon = findViewById<LinearLayout>(R.id.settingsIcon)
+//        val logoutButton = findViewById<Button>(R.id.logout)
+//        settingsIcon.setOnClickListener {
+//            startActivity(Intent(this, SettingsActivity::class.java))
+//            finish()
+//        }
+//
+//        logoutButton.setOnClickListener {
+//            startActivity(Intent(this, LoginActivity::class.java))
+//            finish()
+//        }
     }
 }

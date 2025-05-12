@@ -35,8 +35,8 @@ class ForgotPasswordActivity : Activity() {
         val backToLogin = findViewById<TextView>(R.id.backToLogin)
 
         resetBtn.setOnClickListener {
-            handleForgotPassword()
-            // startActivity(Intent(this, ChangePasswordActivity::class.java))
+             handleForgotPassword()
+//            startActivity(Intent(this, ChangePasswordActivity::class.java))
         }
 
         backToLogin.setOnClickListener {

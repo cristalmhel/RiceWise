@@ -40,8 +40,8 @@ class ChangePasswordActivity : Activity() {
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
             } else {
                 // TODO: Implement actual password update logic
-                // startActivity(Intent(this, ChangePasswordSuccessActivity::class.java))
-                // finish()
+//                startActivity(Intent(this, ChangePasswordSuccessActivity::class.java))
+//                finish()
                 handleResetPassword(email, newPass)
             }
         }

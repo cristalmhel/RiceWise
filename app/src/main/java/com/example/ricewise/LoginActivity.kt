@@ -35,8 +35,9 @@ class LoginActivity : Activity() {
                 return@setOnClickListener
             }
 
-           login(email, password)
-            //startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
+            login(email, password)
+//            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+//            finish()
         }
 
         val forgotPasswordText = findViewById<TextView>(R.id.forgotPasswordText)
@@ -57,7 +58,8 @@ class LoginActivity : Activity() {
         apiService.login(credentials).enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
-                    startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
+                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                    finish()
                 } else {
                     val errorMessage = response.errorBody()?.string() ?: "Login failed"
                     Toast.makeText(this@LoginActivity, "Invalid email or password.", Toast.LENGTH_SHORT).show()
