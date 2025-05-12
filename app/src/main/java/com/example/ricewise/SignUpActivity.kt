@@ -163,6 +163,8 @@ class SignUpActivity : Activity() {
                 ) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
+//                startActivity(Intent(this@SignUpActivity, SignUpSuccessActivity::class.java))
+//                finish()
                 // TODO: Register logic
                 val request = RegisterRequest(
                     email = mail,

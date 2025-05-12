@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,150 +8,134 @@
     android:padding="16dp"
     tools:context=".DashboardActivity">
 
-    <TextView
-        android:id="@+id/dashboardTitle"
+    <!-- Dashboard Title -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="RiceWise Dashboard"
-        android:textAlignment="center"
-        android:textColor="@color/green_700"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:paddingBottom="20dp" />
+        android:layout_height="179dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="48dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-    <GridLayout
-        android:id="@+id/dashboardGrid"
+        <ImageView
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo3" />
+    </LinearLayout>
+
+    <!-- Content Area -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:columnCount="2"
-        android:rowCount="3"
-        android:alignmentMode="alignMargins"
-        android:useDefaultMargins="true">
+        android:orientation="vertical"
+        android:gravity="center">
+        <!-- Add content views here -->
+    </LinearLayout>
 
+    <!-- Custom Bottom Navigation -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:weightSum="4"
+        android:elevation="8dp">
+
+        <!-- Home -->
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center"
             android:onClick="goToHome">
 
             <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/home"
-                android:tint="@color/green_700"
-                tools:ignore="UseAppTint"/>
+                android:tint="#6A994E" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Home"
-                android:textColor="@color/green_700"
-                android:textSize="16sp"
-                android:paddingTop="8dp" />
+                android:textColor="#6A994E"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <!-- Settings -->
         <LinearLayout
-            android:id="@+id/settingsIcon"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center">
+            android:gravity="center"
+            android:onClick="goToSettings">
 
             <ImageView
-                android:layout_width="41dp"
-                android:layout_height="48dp"
+                android:id="@+id/settingsIcon"
+                android:layout_width="24dp"
+                android:layout_height="19dp"
                 android:src="@drawable/settings"
-                android:tint="@color/green_700"
-                tools:ignore="UseAppTint"/>
+                android:tint="#6A994E" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Settings"
-                android:textColor="@color/green_700"
-                android:textSize="16sp"
-                android:paddingTop="8dp" />
+                android:textColor="#6A994E"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <!-- Notifications -->
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center"
             android:onClick="goToNotifications">
 
             <ImageView
-                android:layout_marginTop="10dp"
-                android:layout_width="48dp"
-                android:layout_height="38dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/bell"
-                android:tint="@color/green_700"
-                tools:ignore="UseAppTint" />
+                android:tint="#6A994E" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notifications"
-                android:textColor="@color/green_700"
-                android:textSize="16sp"
-                android:paddingTop="8dp" />
+                android:text="Alerts"
+                android:textColor="#6A994E"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <!-- Help -->
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center"
             android:onClick="goToHelp">
 
             <ImageView
-                android:layout_marginTop="10dp"
-                android:layout_width="45dp"
-                android:layout_height="40dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/help"
-                android:tint="@color/green_700"
-                tools:ignore="UseAppTint" />
+                android:tint="#6A994E" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Help"
-                android:textColor="@color/green_700"
-                android:textSize="16sp"
-                android:paddingTop="8dp" />
+                android:textColor="#6A994E"
+                android:textSize="12sp" />
         </LinearLayout>
 
-    </GridLayout>
-
-
-
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#b23b3b"
-        android:textSize="16sp"
-        android:layout_gravity="center"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:paddingTop="100dp"
-        android:onClick="logout">
-
     </LinearLayout>
+
 </LinearLayout>

@@ -1,0 +1,15 @@
+<!-- res/drawable/rounded_button.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Fill color -->
+    <solid android:color="@color/gray_400" /> <!-- Purple fill, change as needed -->
+
+    <!-- Optional border -->
+    <stroke
+        android:width="2dp"
+        android:color="@color/gray_400" /> <!-- Same as fill or different -->
+
+    <!-- Rounded corners -->
+    <corners android:radius="25dp" />
+</shape>
